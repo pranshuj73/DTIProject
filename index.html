@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DTI Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- FORM TO ENTER DETAILS -->
+  <div class="form" id="form">
+    <label class="dropdown-label" for="start">Choose a start location:</label>
+    <select class="dropdown" name="start" id="start">
+      <option value="ambattur">Ambattur</option>
+      <option value="anna_nagar">Anna Nagar</option>
+      <option value="ayanavaram">Ayanavaram</option>
+      <option value="egmore">Egmore</option>
+      <option value="ekkaduthangal">Ekkaduthangal</option>
+      <option value="gandhi_nagar">Gandhi Nagar</option>
+      <option value="kodambakkam">Kodambakkam</option>
+      <option value="kodungaiyur">Kodungaiyur</option>
+      <option value="kolathur">Kolathur</option>
+      <option value="mandaveli">Mandaveli</option>
+      <option value="mylapore">Mylapore</option>
+      <option value="nandanam">Nandanam</option>
+      <option value="pallikaranai">Pallikaranai</option>
+      <option value="pammal">Pammal</option>
+      <option value="perambur">Perambur</option>
+      <option value="royapuram">Royapuram</option>
+      <option value="semmanjeri" selected>Semmanjeri</option>
+      <option value="sholinganallur">Sholinganallur</option>
+      <option value="tambaram">Tambaram</option>
+      <option value="thiruvanmiyur">Thiruvanmiyur</option>
+      <option value="tondiarpet">Tondiarpet</option>
+      <option value="triplicane">Triplicane</option>
+      <option value="vallalar_nagar">Vallalar Nagar</option>
+      <option value="velachery">Velachery</option>
+      <option value="vyasarpadi">Vyasarpadi</option>
+      <option value="west_mambalam">West Mambalam</option>
+    </select>
+
+    <label class="dropdown-label mt-1" for="destination">Choose a destination:</label>
+    <select class="dropdown" name="destination" id="destination">
+      <option value="ambattur">Ambattur</option>
+      <option value="anna_nagar">Anna Nagar</option>
+      <option value="ayanavaram">Ayanavaram</option>
+      <option value="egmore">Egmore</option>
+      <option value="ekkaduthangal">Ekkaduthangal</option>
+      <option value="gandhi_nagar">Gandhi Nagar</option>
+      <option value="kodambakkam">Kodambakkam</option>
+      <option value="kodungaiyur">Kodungaiyur</option>
+      <option value="kolathur">Kolathur</option>
+      <option value="mandaveli">Mandaveli</option>
+      <option value="mylapore">Mylapore</option>
+      <option value="nandanam">Nandanam</option>
+      <option value="pallikaranai">Pallikaranai</option>
+      <option value="pammal">Pammal</option>
+      <option value="perambur">Perambur</option>
+      <option value="royapuram">Royapuram</option>
+      <option value="semmanjeri">Semmanjeri</option>
+      <option value="sholinganallur">Sholinganallur</option>
+      <option value="tambaram">Tambaram</option>
+      <option value="thiruvanmiyur">Thiruvanmiyur</option>
+      <option value="tondiarpet">Tondiarpet</option>
+      <option value="triplicane">Triplicane</option>
+      <option value="vallalar_nagar">Vallalar Nagar</option>
+      <option value="velachery">Velachery</option>
+      <option value="vyasarpadi">Vyasarpadi</option>
+      <option value="west_mambalam">West Mambalam</option>
+    </select>
+
+    <button class="btn mt-2" id="generateBtn" onclick="generateTicket()">Generate Ticket</button>
+  </div>
+
+
+  <!-- THE GENERATED TICKET  -->
+  <div class="ticket hidden" id="ticket">
+    <h3>YOUR TICKET</h3>
+
+    <section class="info-section">
+      <h4>From</h4>
+      <p id="ticket-start">Hello</p>  
+    </section>
+    
+    <section class="info-section mt-1">
+      <h4>To</h4>
+      <p id="ticket-end">Goodbye</p>
+    </section>
+    
+    <section class="info-section mt-1">
+      <h4>Price</h4>
+      <p>₹ <span id="ticket-price"></span></p>
+    </section>
+    
+    <small class="mt-2">Ticket ID: <span id="ticket-id"></span></small>
+  </div>
+
+  <script>
+    function capitalCase(string) {
+      const words = string.split(" ");
+
+      for (let i = 0; i < words.length; i++) {
+          words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+      }
+
+      return words.join(" ");
+    }
+
+    function generateTicket() {
+      var dropdown = document.getElementById('form');
+      var ticket = document.getElementById('ticket');
+
+      // hide the form and show the ticket
+      dropdown.classList.add('hidden');
+      ticket.classList.remove('hidden');
+
+      // get data from dropdown menus
+      var start = document.getElementById('start').value.replace("_", " ");
+      var destination = document.getElementById('destination').value.replace("_", " ");
+      
+      // randomly generate price between 0 and 1000
+      var price = Math.floor(Math.random() * 1000);
+
+      // get ticket elements || use this to generate my ticket form finally
+      var ticketStart = document.getElementById('ticket-start');
+      var ticketEnd = document.getElementById('ticket-end');
+      var ticketPrice = document.getElementById('ticket-price');
+      var ticketId = document.getElementById('ticket-id');
+
+      // set the ticket values from the dropdowns
+      ticketStart.innerHTML = capitalCase(start);
+      ticketEnd.innerHTML = capitalCase(destination);
+      ticketPrice.innerHTML = price;
+      // generate a unique ticket id
+      // id = 3 letters of start + 3 letters of end + the current time
+      ticketId.innerHTML = start.slice(0,3) + destination.slice(0,3) + Date.now();
+
+    }
+  </script>
+  
+</body>
+</html>
