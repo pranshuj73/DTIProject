@@ -19,9 +19,10 @@ function generateTicket() {
   // get data from dropdown menus
   var start = document.getElementById('start').value.replace("_", " ");
   var destination = document.getElementById('destination').value.replace("_", " ");
+  var quantity = document.getElementById('quantity').value;
   
   // add length of start and end location + 20 to get the fixed price
-  var price = start.length + destination.length + 20;
+  var price = (start.length + destination.length + 20) * parseInt(quantity);
 
   // get ticket elements || use this to generate my ticket form finally
   var ticketStart = document.getElementById('ticket-start');
